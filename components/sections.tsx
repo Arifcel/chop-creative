@@ -10,6 +10,9 @@ export function Hero() {
         <h1 className="max-w-[8.5em] text-[clamp(48px,8.8vw,160px)] leading-[.92] tracking-[-.03em] text-balance">
           Lick-your-chops good branding.
         </h1>
+        <p className="mt-[clamp(16px,2vw,28px)] font-display text-[clamp(24px,3vw,48px)] leading-[1.05] font-medium tracking-[-.02em] text-balance">
+          Yap-worthy advertising &amp; marketing.
+        </p>
         <div className="mt-[clamp(40px,5vw,72px)] flex flex-wrap items-end justify-between gap-x-16 gap-y-7">
           <p className="max-w-[30em] text-[clamp(18px,1.6vw,22px)] leading-[1.45] text-pretty">
             We create standout brands built on substance. Rooted in strategy, shaped by values, and expressed with

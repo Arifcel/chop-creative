@@ -69,8 +69,8 @@ export default function Services() {
             <div
               className="rounded-[clamp(20px,2.4vw,32px)]"
               style={{
-                background: open ? "#E5FF2F" : "transparent",
-                color: open ? "#000" : "inherit",
+                background: open ? "#000" : "transparent",
+                color: open ? "#EEEEE6" : "inherit",
                 paddingInline: open ? "clamp(20px,2.6vw,40px)" : 0,
                 transition: `background .4s ease, padding .45s ${ease}`,
               }}
@@ -83,7 +83,10 @@ export default function Services() {
                 className="flex w-full cursor-pointer items-center justify-between gap-6 py-[clamp(18px,2vw,28px)] text-left transition-[padding] duration-[350ms] hover:pl-[clamp(10px,1.4vw,22px)]"
                 style={{ transitionTimingFunction: ease }}
               >
-                <span className="font-display text-[clamp(32px,4.6vw,72px)] leading-none font-medium tracking-[-.02em]">
+                <span
+                  className="font-display text-[clamp(32px,4.6vw,72px)] leading-none font-medium tracking-[-.02em] transition-colors duration-300"
+                  style={{ color: open ? "#E5FF2F" : "inherit" }}
+                >
                   {s.title}
                 </span>
                 <span
@@ -91,9 +94,10 @@ export default function Services() {
                   className="grid aspect-square w-[clamp(44px,4vw,60px)] flex-none place-items-center rounded-full border-[1.5px] border-current text-[clamp(22px,2vw,30px)] font-normal"
                   style={{
                     transform: open ? "rotate(45deg)" : "none",
-                    background: open ? "#000" : "transparent",
-                    color: open ? "#E5FF2F" : "inherit",
-                    transition: "transform .35s cubic-bezier(.3,1.4,.5,1), background .2s, color .2s",
+                    background: open ? "#E5FF2F" : "transparent",
+                    color: open ? "#000" : "inherit",
+                    borderColor: open ? "#E5FF2F" : "currentColor",
+                    transition: "transform .35s cubic-bezier(.3,1.4,.5,1), background .2s, color .2s, border-color .2s",
                   }}
                 >
                   +
