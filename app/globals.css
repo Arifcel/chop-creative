@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #eeeee6;
+  --color-lime: #e5ff2f;
+  --color-navy: #0a1d35;
+  --font-sans: "General Sans", system-ui, sans-serif;
+  --font-display: "Clash Display", "General Sans", system-ui, sans-serif;
+}
+
+@utility container-x {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px);
+  box-sizing: border-box;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: #eeeee6;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  ::selection {
+    background: #e5ff2f;
+    color: #000;
+  }
+}
+
+/* Scroll-driven highlight: --mk (0–100%) is set by <Effects /> */
+.mark {
+  background-image: linear-gradient(var(--fg, #000), var(--fg, #000));
+  background-repeat: no-repeat;
+  background-size: var(--mk, 0%) 75%;
+  background-position: 0 50%;
+}
+.mark > span {
+  padding: 0 0.08em;
+  margin: 0 -0.08em;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(var(--bg, #e5ff2f), var(--bg, #e5ff2f)),
+    linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: var(--mk, 0%) 100%, 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
