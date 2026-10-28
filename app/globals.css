@@ -6,6 +6,19 @@
   --color-navy: #0a1d35;
   --font-sans: "General Sans", system-ui, sans-serif;
   --font-display: "Clash Display", "General Sans", system-ui, sans-serif;
+  --animate-marquee: marquee 45s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
 @utility container-x {

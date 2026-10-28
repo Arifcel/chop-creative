@@ -37,7 +37,7 @@ function Caret({ open }: { open: boolean }) {
   );
 }
 
-export default function Nav() {
+export default function Nav({ base = "" }: { base?: string }) {
   const [menu, setMenu] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -72,7 +72,7 @@ export default function Nav() {
         className="rounded-[20px] bg-[#F6F6F1]/90 text-black shadow-[0_1px_0_rgba(0,0,0,.04),0_8px_30px_-12px_rgba(0,0,0,.18)] backdrop-blur-md"
       >
         <div className="flex items-center gap-6 py-3 pr-3 pl-[clamp(16px,2vw,32px)]">
-          <a href="#top" aria-label="Chop Creative" onClick={close} className="flex-none hover:no-underline">
+          <a href={base + "#top"} aria-label="Chop Creative" onClick={close} className="flex-none hover:no-underline">
             <Image src="/assets/chop-logo.png" alt="Chop Creative" width={1584} height={608} priority className="h-8 w-auto" />
           </a>
 
@@ -109,7 +109,7 @@ export default function Nav() {
                     <ul className="w-64 rounded-[16px] bg-[#F6F6F1] p-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,.28)]">
                       {l.menu.map((s) => (
                         <li key={s}>
-                          <a href={l.href} onClick={close} className={`${linkCls} w-full`}>
+                          <a href={base + l.href} onClick={close} className={`${linkCls} w-full`}>
                             {s}
                           </a>
                         </li>
@@ -119,7 +119,7 @@ export default function Nav() {
                 </li>
               ) : (
                 <li key={l.label}>
-                  <a href={l.href} className={linkCls}>
+                  <a href={base + l.href} className={linkCls}>
                     {l.label}
                   </a>
                 </li>
@@ -139,7 +139,7 @@ export default function Nav() {
               Wanna yap?
               <span aria-hidden>→</span>
             </span>
-            <a href="#contact" className={`${btnBase} bg-black text-cream hover:bg-lime hover:text-black max-sm:hidden`}>
+            <a href={base + "#contact"} className={`${btnBase} bg-black text-cream hover:bg-lime hover:text-black max-sm:hidden`}>
               Let’s Talk Chop
             </a>
             <a href="mailto:hej@chopcreative.com" className={`${btnBase} bg-lime text-black hover:bg-black hover:text-lime max-sm:hidden`}>
@@ -175,12 +175,12 @@ export default function Nav() {
           <div className="min-h-0 overflow-hidden" inert={!mobile}>
             <div className="flex flex-col gap-1 border-t border-black/10 px-3 pt-3 pb-4">
               {[...links, { label: "Yappy Hour", href: "#" }].map((l) => (
-                <a key={l.label} href={l.href} onClick={close} className={`${linkCls} font-display text-[26px]`}>
+                <a key={l.label} href={base + l.href} onClick={close} className={`${linkCls} font-display text-[26px]`}>
                   {l.label}
                 </a>
               ))}
               <div className="mt-3 grid grid-cols-2 gap-2 sm:hidden">
-                <a href="#contact" onClick={close} className={`${btnBase} bg-black text-cream`}>
+                <a href={base + "#contact"} onClick={close} className={`${btnBase} bg-black text-cream`}>
                   Let’s Talk Chop
                 </a>
                 <a href="mailto:hej@chopcreative.com" className={`${btnBase} bg-lime text-black`}>
