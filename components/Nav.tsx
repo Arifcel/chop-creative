@@ -134,9 +134,11 @@ export default function Nav() {
           </ul>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-0">
-            <a href="mailto:hej@chopcreative.com" className={`${linkCls} max-xl:hidden`}>
-              Say hej
-            </a>
+            {/* Plain lead-in to the button next to it, not a link */}
+            <span className="inline-flex items-center gap-2 px-3 text-[17px] font-medium max-xl:hidden">
+              Wanna yap?
+              <span aria-hidden>→</span>
+            </span>
             <a href="#contact" className={`${btnBase} bg-black text-cream hover:bg-lime hover:text-black max-sm:hidden`}>
               Let’s Talk Chop
             </a>
