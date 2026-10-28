@@ -3,23 +3,6 @@ import { Eyebrow, Pill, Sticker, navLinks } from "./ui";
 
 const sectionY = "py-[clamp(72px,10vw,144px)]";
 
-export function Nav() {
-  return (
-    <nav className="container-x flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-6">
-      <a href="#top" aria-label="Chop Creative">
-        <Image src="/assets/chop-logo.png" alt="Chop Creative" width={1584} height={608} priority className="h-[38px] w-auto" />
-      </a>
-      <div className="flex flex-wrap gap-x-[clamp(18px,2.4vw,36px)] gap-y-2.5 text-[17px] font-medium">
-        {navLinks.map((l) => (
-          <a key={l.label} href={l.href}>
-            {l.label}
-          </a>
-        ))}
-      </div>
-    </nav>
-  );
-}
-
 export function Hero() {
   return (
     <section data-bg="#EEEEE6" data-fg="#000" className="relative">
@@ -148,7 +131,7 @@ export function Studio() {
 
 export function WhoWeAre() {
   return (
-    <section data-bg="#0A1D35" data-fg="#EEEEE6" className={`relative ${sectionY}`}>
+    <section id="who-we-are" data-bg="#0A1D35" data-fg="#EEEEE6" className={`relative ${sectionY}`}>
       <div className="container-x">
         <Eyebrow className="mb-5">Who we are</Eyebrow>
         <h2 className="max-w-[9em] text-[clamp(48px,8vw,140px)] leading-[.92] tracking-[-.03em]">We’re lean & strategy-first.</h2>
