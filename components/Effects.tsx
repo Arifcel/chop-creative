@@ -6,6 +6,7 @@ type DragState = { x: number; y: number; r: number };
 type DragEl = HTMLElement & { __drag?: DragState };
 type MarkEl = HTMLElement & { __p?: number; __mk?: string };
 type MarqueeEl = HTMLElement & { __x?: number; __v?: number };
+type ParallaxEl = HTMLElement & { __p?: number };
 
 const PICS = ["tongue", "teeth", "fangs", "walk", "peace"];
 
@@ -125,7 +126,8 @@ export default function Effects() {
     };
     applyBg();
 
-    // Marks + marquees
+    // Marks, marquees + parallax stickers
+    const parallax = Array.from(document.querySelectorAll<ParallaxEl>("[data-parallax]"));
     const marks = Array.from(document.querySelectorAll<MarkEl>("[data-mark]"));
     const marquees = Array.from(document.querySelectorAll<MarqueeEl>("[data-mq]"));
     let t = performance.now();
@@ -161,6 +163,17 @@ export default function Effects() {
         mq.__v = (mq.__v ?? target) + (target - (mq.__v ?? target)) * Math.min(1, dt * 6);
         mq.__x = ((((mq.__x ?? 0) - mq.__v * dt * dir) % w) - w) % w;
         mq.style.transform = `translate3d(${mq.__x}px,0,0)`;
+      }
+
+      // -1 below the viewport centre, +1 above it; eased so the motion trails the scroll a little
+      for (const el of parallax) {
+        if (reduced.matches) continue;
+        const r = el.getBoundingClientRect();
+        const p = Math.min(1, Math.max(-1, (vh / 2 - (r.top + r.height / 2)) / (vh / 2)));
+        el.__p = (el.__p ?? p) + (p - (el.__p ?? p)) * Math.min(1, dt * 6);
+        const k = Number(el.dataset.parallax) || 1;
+        const q = el.__p * k;
+        el.style.transform = `translate3d(${(q * 18).toFixed(2)}px,${(q * -60).toFixed(2)}px,0) rotate(${(q * -18).toFixed(2)}deg)`;
       }
 
       raf = requestAnimationFrame(tick);

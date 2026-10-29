@@ -96,10 +96,16 @@ export function About() {
   return (
     <section id="about" data-bg="#000" data-fg="#EEEEE6" className={sectionY}>
       <div className="container-x">
-        <div className="flex flex-wrap items-center gap-x-[clamp(24px,3vw,48px)] gap-y-4">
-          <h2 className="max-w-[8em] text-[clamp(52px,9vw,164px)] leading-[.92] tracking-[-.03em]">Clarity, with some teeth.</h2>
-          <Sticker name="fangs" rot={-8} className="relative w-[clamp(110px,13vw,210px)]" />
-        </div>
+        <h2 className="max-w-[8em] text-[clamp(52px,9vw,164px)] leading-[.92] tracking-[-.03em]">
+          Clarity, with some{" "}
+          <span className="whitespace-nowrap">
+            teeth.
+            {/* Wrapper carries the scroll motion so it doesn't fight the sticker's drag transform */}
+            <span data-parallax="1" className="ml-[.4em] inline-block align-middle">
+              <Sticker name="fangs" rot={-8} className="relative block w-[1.25em]" />
+            </span>
+          </span>
+        </h2>
         <div className="mt-[clamp(40px,5vw,72px)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-end gap-x-20 gap-y-8">
           <p className="max-w-[26em] text-[clamp(20px,2vw,28px)] leading-[1.3] font-medium tracking-[-.01em]">
             We are sharp thinking, confident creatives that bite just enough to break through the noise and hold our ground.
