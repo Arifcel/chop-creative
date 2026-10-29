@@ -142,9 +142,6 @@ export default function Nav({ base = "" }: { base?: string }) {
             <a href={base + "#contact"} className={`${btnBase} bg-black text-cream hover:bg-lime hover:text-black max-sm:hidden`}>
               Let’s Talk Chop
             </a>
-            <a href="mailto:hej@chopcreative.com" className={`${btnBase} bg-lime text-black hover:bg-black hover:text-lime max-sm:hidden`}>
-              Start a project
-            </a>
             <button
               type="button"
               aria-label={mobile ? "Close menu" : "Open menu"}
@@ -179,14 +176,9 @@ export default function Nav({ base = "" }: { base?: string }) {
                   {l.label}
                 </a>
               ))}
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:hidden">
-                <a href={base + "#contact"} onClick={close} className={`${btnBase} bg-black text-cream`}>
-                  Let’s Talk Chop
-                </a>
-                <a href="mailto:hej@chopcreative.com" className={`${btnBase} bg-lime text-black`}>
-                  Start a project
-                </a>
-              </div>
+              <a href={base + "#contact"} onClick={close} className={`${btnBase} mt-3 bg-black text-cream sm:hidden`}>
+                Let’s Talk Chop
+              </a>
             </div>
           </div>
         </div>
