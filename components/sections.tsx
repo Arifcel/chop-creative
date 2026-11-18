@@ -155,6 +155,36 @@ const testimonials = [
     role: "Diver, CEO",
     work: ["Illustration"],
   },
+  {
+    client: "Leavo",
+    quote: "Client quote goes here. One or two sentences on what it was like to work with Chop.",
+    name: "Full Name",
+    role: "Title, Leavo",
+    work: ["From content chaos to strategic consistency"],
+  },
+  {
+    client: "Client name",
+    quote:
+      "Client quote goes here. Two or three sentences on what it was like to work with Chop and what changed for the business afterwards.",
+    name: "Full Name",
+    role: "Title, Company",
+    work: ["Visual Identity", "Packaging"],
+  },
+  {
+    client: "Client name",
+    quote: "Client quote goes here. One or two sentences on what it was like to work with Chop.",
+    name: "Full Name",
+    role: "Title, Company",
+    work: ["Website Design", "Sales Decks"],
+  },
+  {
+    client: "Client name",
+    quote:
+      "Client quote goes here. Two or three sentences on what it was like to work with Chop and what changed for the business afterwards.",
+    name: "Full Name",
+    role: "Title, Company",
+    work: ["Digital Ads", "Social Media"],
+  },
 ];
 
 function QuoteMark() {
@@ -174,38 +204,51 @@ function ClientMark() {
   );
 }
 
+function TestimonialCopy({ clone }: { clone?: boolean }) {
+  return (
+    <ul
+      aria-hidden={clone || undefined}
+      data-mq-clone={clone || undefined}
+      className={`m-0 flex list-none gap-[clamp(28px,8vw,120px)] p-0 pr-[clamp(28px,8vw,120px)] ${clone ? "motion-reduce:hidden" : ""}`}
+    >
+      {testimonials.map((t, i) => (
+        <li key={i} className="w-[min(84vw,680px)] flex-none">
+          <figure className="m-0 flex h-full flex-col">
+            <Eyebrow className="mb-4">{t.client}</Eyebrow>
+            <QuoteMark />
+            <blockquote className="m-0 mt-5 mb-[clamp(32px,4vw,64px)] text-[clamp(22px,2.2vw,32px)] leading-[1.25] font-medium tracking-[-.01em] text-pretty">
+              {t.quote}
+            </blockquote>
+            <figcaption className="mt-auto">
+              <div className="flex items-center justify-between gap-6 border-b-[1.5px] border-current/20 pb-6">
+                <div className="text-[clamp(17px,1.4vw,20px)] leading-[1.35] font-semibold">
+                  <div>{t.name}</div>
+                  <div>{t.role}</div>
+                </div>
+                <ClientMark />
+              </div>
+              <div className="mt-3 text-right text-sm">{t.work.join(" | ")}</div>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function Testimonials() {
   return (
     <section data-bg="#EEEEE6" data-fg="#000" className="pb-[clamp(72px,10vw,144px)]">
+      {/* Hovering this wrapper pauses the marquee; with reduced motion it becomes a manual scroller */}
       <div
         role="region"
         aria-label="Client testimonials"
-        tabIndex={0}
-        className="bleed-x snap-x snap-mandatory overflow-x-auto pb-6 [scrollbar-color:currentColor_transparent] [scrollbar-width:thin]"
+        className="overflow-hidden motion-reduce:overflow-x-auto motion-reduce:px-5"
       >
-        <ul className="flex w-max gap-[clamp(28px,8vw,120px)]">
-          {testimonials.map((t) => (
-            <li key={t.client} className="w-[min(84vw,680px)] snap-start">
-              <figure className="m-0 flex h-full flex-col">
-                <Eyebrow className="mb-4">{t.client}</Eyebrow>
-                <QuoteMark />
-                <blockquote className="m-0 mt-5 mb-[clamp(32px,4vw,64px)] text-[clamp(22px,2.2vw,32px)] leading-[1.25] font-medium tracking-[-.01em] text-pretty">
-                  {t.quote}
-                </blockquote>
-                <figcaption className="mt-auto">
-                  <div className="flex items-center justify-between gap-6 border-b-[1.5px] border-current/20 pb-6">
-                    <div className="text-[clamp(17px,1.4vw,20px)] leading-[1.35] font-semibold">
-                      <div>{t.name}</div>
-                      <div>{t.role}</div>
-                    </div>
-                    <ClientMark />
-                  </div>
-                  <div className="mt-3 text-right text-sm">{t.work.join(" | ")}</div>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+        <div data-mq data-speed="0.14" data-dir="1" className="flex w-max">
+          <TestimonialCopy />
+          <TestimonialCopy clone />
+        </div>
       </div>
     </section>
   );
