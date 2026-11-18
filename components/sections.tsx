@@ -138,6 +138,79 @@ export function Studio() {
   );
 }
 
+const testimonials = [
+  {
+    client: "Elisity",
+    quote:
+      "Marketing is about values. It’s a complicated & noisy world, we’re not going to get a chance to get people to remember much about us.",
+    name: "Charlie Treadwell",
+    role: "CMO, Elisity",
+    work: ["Brand Strategy", "Campaigns", "Brand Oversight"],
+  },
+  {
+    client: "Diver",
+    quote:
+      "Marketing is about values. It’s a complicated & noisy world, we’re not going to get a chance to get people to remember much about us.",
+    name: "Sebastian Ahmoud",
+    role: "Diver, CEO",
+    work: ["Illustration"],
+  },
+];
+
+function QuoteMark() {
+  return (
+    <svg aria-hidden viewBox="0 0 48 36" className="w-[clamp(36px,3.4vw,48px)] fill-current">
+      <path d="M0 36V20C0 9 6 2 18 0l2 6c-6 2-9 6-9 10h9v20H0Zm28 0V20C28 9 34 2 46 0l2 6c-6 2-9 6-9 10h9v20H28Z" />
+    </svg>
+  );
+}
+
+function ClientMark() {
+  return (
+    <svg aria-hidden viewBox="0 0 46 64" className="h-[clamp(44px,4.4vw,64px)] flex-none">
+      <path d="M38 8 9 25M9 40l29 16" fill="none" stroke="currentColor" strokeWidth="13" strokeLinecap="round" />
+      <path d="M37 25v14l-12-7z" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function Testimonials() {
+  return (
+    <section data-bg="#EEEEE6" data-fg="#000" className="pb-[clamp(72px,10vw,144px)]">
+      <div
+        role="region"
+        aria-label="Client testimonials"
+        tabIndex={0}
+        className="bleed-x snap-x snap-mandatory overflow-x-auto pb-6 [scrollbar-color:currentColor_transparent] [scrollbar-width:thin]"
+      >
+        <ul className="flex w-max gap-[clamp(28px,8vw,120px)]">
+          {testimonials.map((t) => (
+            <li key={t.client} className="w-[min(84vw,680px)] snap-start">
+              <figure className="m-0 flex h-full flex-col">
+                <Eyebrow className="mb-4">{t.client}</Eyebrow>
+                <QuoteMark />
+                <blockquote className="m-0 mt-5 mb-[clamp(32px,4vw,64px)] text-[clamp(22px,2.2vw,32px)] leading-[1.25] font-medium tracking-[-.01em] text-pretty">
+                  {t.quote}
+                </blockquote>
+                <figcaption className="mt-auto">
+                  <div className="flex items-center justify-between gap-6 border-b-[1.5px] border-current/20 pb-6">
+                    <div className="text-[clamp(17px,1.4vw,20px)] leading-[1.35] font-semibold">
+                      <div>{t.name}</div>
+                      <div>{t.role}</div>
+                    </div>
+                    <ClientMark />
+                  </div>
+                  <div className="mt-3 text-right text-sm">{t.work.join(" | ")}</div>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export function WhoWeAre() {
   return (
     <section id="who-we-are" data-bg="#000" data-fg="#EEEEE6" className={`relative ${sectionY}`}>

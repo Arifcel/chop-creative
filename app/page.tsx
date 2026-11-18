@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import Effects from "@/components/Effects";
 import Nav from "@/components/Nav";
 import Services from "@/components/Services";
-import { About, Contact, Footer, Hero, Studio, WhoWeAre, WordWall } from "@/components/sections";
+import { About, Contact, Footer, Hero, Studio, Testimonials, WhoWeAre, WordWall } from "@/components/sections";
 
 export default function Home() {
   return (
@@ -18,6 +18,7 @@ export default function Home() {
       <About />
       <Studio />
       <Services />
+      <Testimonials />
       <WhoWeAre />
       <Contact />
       <Footer />

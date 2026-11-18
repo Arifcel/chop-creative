@@ -28,6 +28,13 @@
   box-sizing: border-box;
 }
 
+/* Full-bleed scroller whose first item lines up with .container-x */
+@utility bleed-x {
+  --gutter: max(clamp(20px, 4vw, 56px), calc((100% - 1440px) / 2 + clamp(20px, 4vw, 56px)));
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
