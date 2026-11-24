@@ -4,8 +4,17 @@ import Nav from "@/components/Nav";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 import { About, Contact, Footer, Hero, Studio, WhoWeAre, WordWall } from "@/components/sections";
+import { getTestimonials } from "@/lib/sanity";
 
-export default function Home() {
+// Content published in Sanity shows up on the site within a minute
+export const revalidate = 60;
+
+export default async function Home() {
+  const testimonials = await getTestimonials().catch((err) => {
+    console.error("Could not load testimonials from Sanity", err);
+    return [];
+  });
+
   return (
     <div
       id="top"
@@ -19,7 +28,7 @@ export default function Home() {
       <About />
       <Studio />
       <Services />
-      <Testimonials />
+      <Testimonials items={testimonials} />
       <WhoWeAre />
       <Contact />
       <Footer />
