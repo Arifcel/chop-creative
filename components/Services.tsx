@@ -2,45 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { focus } from "@/lib/image";
+import type { HomePage, Service } from "@/lib/sanity";
 import { Eyebrow, ImagePlaceholder } from "./ui";
-
-const services = [
-  {
-    title: "Brand strategy.",
-    text: "We build brands from the inside out—strategy, story, and creative systems that help you cut through the noise, connect with your audience, and grow your business.",
-    chips: ["Brand Strategy", "Brand Blueprint", "Brand Audit", "Brand Positioning", "Brand Expression"],
-    image: { src: "/assets/brand-strategy.jpg", alt: "Sculptural arches and steps in pastel tones on a brown backdrop" },
-  },
-  {
-    title: "Visual identity.",
-    text: "Minimal, not joyless. Elements have to earn their place.",
-    chips: ["Visual Identity", "Logos", "Templates", "Sonic Branding", "Packaging", "Merch"],
-  },
-  {
-    title: "Advertising.",
-    text: "Yap-worthy advertising. Rooted in strategy, shaped by values, and expressed with attention-grabbing design, we get people talking and drive long-term growth.",
-    chips: ["Digital Ads", "Paid Ads", "OOH Advertising", "Social Media"],
-  },
-  {
-    title: "Websites & decks.",
-    text: "Systems that actually get used.",
-    chips: ["Website Design", "Website Dev", "Sales Decks", "Pitch Decks", "Prompt Engineering"],
-  },
-  {
-    title: "Print & events.",
-    text: "Work that respects time, budget, and reality.",
-    chips: ["Event Collateral", "Print Material"],
-  },
-  {
-    title: "Creative direction.",
-    text: "Clarity over chaos.",
-    chips: ["Creative Direction & Consulting", "Brand Oversight"],
-  },
-];
 
 const ease = "cubic-bezier(.2,.8,.2,1)";
 
-export default function Services() {
+// Titles are shown with a full stop, so drop one typed in the Studio
+const name = (s: Service) => s.title.replace(/\.$/, "");
+
+export default function Services({ content, services }: { content: HomePage["services"]; services: Service[] }) {
   const [acc, setAcc] = useState(0);
   const last = services.length - 1;
 
@@ -51,9 +22,9 @@ export default function Services() {
       className="container-x relative pt-[clamp(96px,12vw,176px)] pb-[clamp(72px,10vw,144px)]"
     >
       <div className="mb-[clamp(32px,4vw,56px)] flex flex-col gap-4">
-        <Eyebrow>What we do</Eyebrow>
+        {content.eyebrow && <Eyebrow>{content.eyebrow}</Eyebrow>}
         <h2 className="max-w-[10em] text-[clamp(40px,5.6vw,92px)] leading-[.96] tracking-[-.03em] text-balance">
-          We build brands from the inside out.
+          {content.heading}
         </h2>
       </div>
 
@@ -62,7 +33,7 @@ export default function Services() {
         const hideBorder = acc === i || acc === i - 1;
         return (
           <div
-            key={s.title}
+            key={s._id}
             className="border-t-[1.5px] transition-[border-color] duration-300"
             style={{ borderColor: hideBorder ? "transparent" : "currentColor" }}
           >
@@ -87,7 +58,7 @@ export default function Services() {
                   className="font-display text-[clamp(32px,4.6vw,72px)] leading-none font-medium tracking-[-.02em] transition-colors duration-300"
                   style={{ color: open ? "#E5FF2F" : "inherit" }}
                 >
-                  {s.title}
+                  {name(s)}.
                 </span>
                 <span
                   aria-hidden
@@ -119,9 +90,9 @@ export default function Services() {
                         {s.text}
                       </p>
                       <div className="flex flex-col gap-3.5">
-                        <Eyebrow>Some of what we do</Eyebrow>
+                        {content.chipsLabel && <Eyebrow>{content.chipsLabel}</Eyebrow>}
                         <div className="flex flex-wrap gap-2.5">
-                          {s.chips.map((c) => (
+                          {s.chips?.map((c) => (
                             <span
                               key={c}
                               className="rounded-full border-[1.5px] border-black bg-cream px-[18px] py-[9px] text-base font-medium text-black"
@@ -132,18 +103,19 @@ export default function Services() {
                         </div>
                       </div>
                     </div>
-                    {"image" in s && s.image ? (
+                    {s.image ? (
                       <Image
-                        src={s.image.src}
-                        alt={s.image.alt}
-                        width={2400}
-                        height={1600}
+                        src={s.image.url}
+                        alt={s.image.alt ?? ""}
+                        width={s.image.width}
+                        height={s.image.height}
                         sizes="(max-width: 760px) 100vw, 50vw"
                         className="aspect-[16/10] min-h-[200px] w-full rounded-[20px] object-cover"
+                        style={{ objectPosition: focus(s.image) }}
                       />
                     ) : (
                       <ImagePlaceholder
-                        label={`Case image · ${s.title.replace(/\.$/, "")}`}
+                        label={`Case image · ${name(s)}`}
                         className="aspect-[16/10] min-h-[200px] rounded-[20px]"
                       />
                     )}

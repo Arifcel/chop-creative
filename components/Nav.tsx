@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const services = [
+// Fallbacks for pages that are not fed from Sanity, like /utkast
+const defaultServices = [
   "Brand strategy",
   "Visual identity",
   "Advertising",
@@ -12,7 +13,7 @@ const services = [
   "Creative direction",
 ];
 
-const links = [
+const navLinks = (services: string[]) => [
   { label: "About", href: "#about" },
   { label: "Chop Shop", href: "#services", menu: services },
   { label: "Who we are", href: "#who-we-are" },
@@ -37,7 +38,18 @@ function Caret({ open }: { open: boolean }) {
   );
 }
 
-export default function Nav({ base = "" }: { base?: string }) {
+export default function Nav({
+  base = "",
+  services = defaultServices,
+  leadIn = "Wanna yap?",
+  ctaLabel = "Let’s Talk Chop",
+}: {
+  base?: string;
+  services?: string[];
+  leadIn?: string | null;
+  ctaLabel?: string | null;
+}) {
+  const links = navLinks(services);
   const [menu, setMenu] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -136,11 +148,11 @@ export default function Nav({ base = "" }: { base?: string }) {
           <div className="ml-auto flex items-center gap-2 lg:ml-0">
             {/* Plain lead-in to the button next to it, not a link */}
             <span className="inline-flex items-center gap-2 px-3 text-[17px] font-medium max-xl:hidden">
-              Wanna yap?
+              {leadIn}
               <span aria-hidden>→</span>
             </span>
             <a href={base + "#contact"} className={`${btnBase} bg-black text-cream hover:bg-lime hover:text-black max-sm:hidden`}>
-              Let’s Talk Chop
+              {ctaLabel}
             </a>
             <button
               type="button"
@@ -177,7 +189,7 @@ export default function Nav({ base = "" }: { base?: string }) {
                 </a>
               ))}
               <a href={base + "#contact"} onClick={close} className={`${btnBase} mt-3 bg-black text-cream sm:hidden`}>
-                Let’s Talk Chop
+                {ctaLabel}
               </a>
             </div>
           </div>
